@@ -2,50 +2,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coupon App</title>
+  <title>My LIFF App</title>
 </head>
-<body><center>
-  <p id="nnname">ชื่อผู้ใช้งานโค๊ด</p><input type="text" id="nname" name="name"><br>
+<body>
   <p id="scanCode"></p>
-  <p id="ncode"></p>
-  <p id="descc"></p>
-  <!--<p id="nxname"></p>-->
   <p>
     <button id="btnScanCode" onclick="scanCode();">Scan Code</button>
-    <button id="btnClose" hidden="true" onclick="liff.closeWindow();">Close</button>
   </p>
-</center>
   <script src="https://static.line-scdn.net/liff/edge/2.1/liff.js"></script>
   <script>
     function scanCode() {
-        var xx = document.getElementsByName("name")[0].value;
-        document.getElementById("scanCode").textContent = "กรุณารอสักครู่";
-        liff.scanCode().then(result => {
+      liff.scanCode().then(result => {
         const stringifiedResult = JSON.stringify(result);
-        obj = JSON.parse(stringifiedResult);
-        var xmlhttp = new XMLHttpRequest();
-        var url = "https://script.google.com/macros/s/AKfycbw5CrtlMDLpsFjOPWIGylftNqw9SZF01rgztvmplfy7Vk0KujCL/exec";
-        var theUrl = url+"?value="+obj.value+"&name="+xx;
-        xmlhttp.open('GET', theUrl);
-        xmlhttp.send();
-            xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var jsonResponse = JSON.parse(this.responseText);
-        }
-        document.getElementById("scanCode").textContent = jsonResponse.xstatus;
-        document.getElementById("ncode").textContent = "โค๊ด : "+obj.value;
-        //document.getElementById("nxname").textContent = "ชื่อ : "+xx;
-        document.getElementById("descc").textContent = jsonResponse.desc;
-        document.getElementById("nname").hidden = true;
-        document.getElementById("nnname").hidden = true;
-
-        document.getElementById("btnScanCode").hidden = true;
-        document.getElementById("btnClose").hidden = false;
-    };
-
+        alert(stringifiedResult);
+        document.getElementById("scanCode").textContent = stringifiedResult;
       });
     }
-    liff.init({ liffId: "1595444618-ng4aaVXp" }, () => {}, err => console.error(err.code, error.message));
+    liff.init({ liffId: "your-liff-id" }, () => {}, err => console.error(err.code, error.message));
   </script>
 </body>
-</html>
+</html> 
